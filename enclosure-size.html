@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tortoise Enclosure Size Calculator — TortoiseCalc</title>
+<meta name="description" content="Tortoise enclosure size calculator. Enter shell length, tortoise count, life stage, and indoor/outdoor housing to get minimum floor area in sq ft and sq m. Free tool.">
+<meta property="og:title" content="Tortoise Enclosure Size Calculator — TortoiseCalc">
+<meta property="og:description" content="Tortoise enclosure size calculator. Enter shell length, tortoise count, life stage, and indoor/outdoor housing to get minimum floor area in sq ft and sq m. Free tool.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tortoise.thehivemakes.com/enclosure-size.html">
+<link rel="stylesheet" href="style.css">
+<script src="js/calc-core.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Tortoise Enclosure Size Calculator",
+  "url": "https://tortoise.thehivemakes.com/enclosure-size.html",
+  "description": "Tortoise enclosure size calculator. Enter shell length, tortoise count, life stage, and indoor/outdoor housing to get minimum floor area in sq ft and sq m. Free tool.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any"
+}
+</script>
+</head>
+<body>
+<header><div class="header-inner"><div class="logo">Tortoise<span>Calc</span></div><div class="tagline">Free tortoise enclosure calculator</div><button onclick="toggleTheme()" style="background:none;border:1px solid var(--border);border-radius:6px;padding:2px 8px;color:var(--muted);cursor:pointer;font-size:14px;margin-left:auto;" aria-label="Toggle dark mode">&#9790;</button></div></header>
+<nav><div class="nav-inner"><a href="index.html">TortoiseCalc</a><span class="sep">/</span><span>Tortoise Enclosure Size Calculator</span></div></nav>
+<main>
+  <div class="ad-leaderboard" id="ad-top">Ad</div>
+  <div class="card">
+    <h1>Tortoise Enclosure Size Calculator</h1>
+    <p class="subtitle">Enter shell length, life stage, and housing type to get a minimum floor-area guideline.</p>
+    <div class="form-grid">
+      <div class="field">
+        <label for="shell_length">Shell length</label>
+        <input type="number" id="shell_length" min="0.5" step="0.1" placeholder="6">
+      </div>
+      <div class="field">
+        <label for="unit">Unit</label>
+        <select id="unit"><option value="in">Inches</option><option value="cm">Centimeters</option></select>
+      </div>
+      <div class="field">
+        <label for="num_tortoises">Number of tortoises</label>
+        <input type="number" id="num_tortoises" min="1" step="1" placeholder="1" value="1">
+      </div>
+      <div class="field">
+        <label for="life_stage">Life stage</label>
+        <select id="life_stage"><option value="hatchling">Hatchling (<2 in / 5 cm)</option><option value="juvenile">Juvenile (still growing)</option><option value="adult">Adult (near full size)</option></select>
+      </div>
+      <div class="field">
+        <label for="housing">Housing type</label>
+        <select id="housing"><option value="indoor">Indoor (tank/table)</option><option value="outdoor">Outdoor (pen/yard)</option></select>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="calculate()">Calculate</button>
+    <button class="btn btn-ghost" onclick="clearAll()">Clear</button>
+    <div class="result" id="result">
+      <div class="result-row">
+        <span class="result-label">Min. floor area per tortoise (sq ft)</span>
+        <span class="result-value" id="t-area-per-sqft">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Min. floor area per tortoise (sq m)</span>
+        <span class="result-value" id="t-area-per-sqm">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Suggested minimum dimensions (per tortoise)</span>
+        <span class="result-value" id="t-dims-per">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Min. total floor area (sq ft)</span>
+        <span class="result-value" id="t-area-total-sqft">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Min. total floor area (sq m)</span>
+        <span class="result-value" id="t-area-total-sqm">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Suggested minimum footprint (all tortoises)</span>
+        <span class="result-value" id="t-dims-total">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Growth note</span>
+        <span class="result-value" id="t-stage-note">—</span>
+      </div>
+      <div class="result-note">Based on the commonly cited tortoise-keeping guideline of a minimum floor area of about 10x shell length by 5x shell length per animal for indoor housing. Outdoor housing is calculated at roughly 4x the indoor floor area (2x each dimension), since tortoises are more active and thermoregulate over a larger range outdoors. This is a general guideline from tortoise-keeping references, not a species-specific or veterinary standard — larger, more active species (e.g. sulcata tortoises) often need substantially more room than this minimum.</div>
+      <div class="shop-links" style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);">&#128722; Shop related: <a href="https://www.ebay.com/sch/i.html?_nkw=tortoise+table+enclosure&mkcid=1&mkrid=711-53200-19255-0&campid=5339147838&toolid=10001" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:600;">Tortoise tables</a> &middot; <a href="https://www.ebay.com/sch/i.html?_nkw=reptile+uvb+lighting&mkcid=1&mkrid=711-53200-19255-0&campid=5339147838&toolid=10001" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:600;">UVB lighting</a> &middot; <a href="https://www.ebay.com/sch/i.html?_nkw=tortoise+substrate&mkcid=1&mkrid=711-53200-19255-0&campid=5339147838&toolid=10001" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:600;">Substrate</a><br><span style="font-size:10px;opacity:0.7;">Affiliate links — we may earn a commission at no cost to you. <a href="https://thehivemakes.com/disclosures.html" target="_blank" style="color:var(--muted);">Learn more</a></span></div>
+    </div>
+  </div>
+  <div class="card email-capture">
+    <h2>Get your results + weekly tortoise care tips</h2>
+    <p>One email per week. Tips, tool deals, new calculators. Unsubscribe anytime.</p>
+    <form method="POST" action="https://buttondown.com/api/emails/embed-subscribe/thehivemakes" class="capture-form">
+      <input type="email" name="email" placeholder="your@email.com" required>
+      <input type="hidden" name="tag" value="tortoise">
+      <input type="hidden" name="metadata__source" value="enclosure-size">
+      <button type="submit" class="btn btn-primary">Send My Results</button>
+    </form>
+    <p class="capture-note">Free tools, useful tips. We recommend products we'd actually use.</p>
+  </div>
+  <div class="card">
+    <h2 style="font-size:16px;font-weight:700;margin-bottom:12px;">Floor Area Multiplier by Housing Type</h2>
+    <table class="ref-table" id="ref-table">
+      <thead><tr><th>Housing</th><th>Length</th><th>Width</th><th>Area vs. indoor minimum</th></tr></thead>
+      <tbody>
+        <tr><td>Indoor (tank/table)</td><td>10x shell length</td><td>5x shell length</td><td>1x (baseline)</td></tr>
+        <tr><td>Outdoor (pen/yard)</td><td>20x shell length</td><td>10x shell length</td><td>~4x indoor minimum</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="ad-rectangle" id="ad-mid">Ad</div>
+  <div class="seo-section">
+    <h2>How the 10x5 Tortoise Enclosure Rule Works</h2>
+    <p>A frequently cited rule of thumb among tortoise keepers is that an indoor enclosure should provide a minimum floor area of about ten times the tortoise's shell length by five times its shell length. A tortoise with a 6-inch shell works out to roughly a 60-by-30-inch floor area — about 12.5 square feet — under this guideline.</p>
+    <p>This is a minimum, not a target. Tortoises are active, ground-covering animals, and most keepers who have the room provide more space than the rule requires. Multiple tortoises housed together generally need close to the full minimum floor area for each additional animal, not a fraction of it, since they still need to move, forage, and get out of each other's way.</p>
+    <p>Outdoor housing needs are larger because outdoor pens have to accommodate temperature swings, digging, grazing, and weather-driven basking behavior that a small indoor enclosure does not. A commonly used starting point is 3–4x the indoor minimum; this calculator uses roughly 4x by doubling both the length and width.</p>
+  </div>
+</main>
+<footer>Free tortoise enclosure sizing tool. No signup, no tracking. General husbandry guidelines only, not species-specific or veterinary advice.<br>Built by <a href="https://thehivemakes.com" style="color:var(--accent)">The Hive</a> · <a href="https://thehivemakes.com/privacy.html" style="color:var(--muted);font-size:11px;">Privacy</a> · <a href="https://thehivemakes.com/terms.html" style="color:var(--muted);font-size:11px;">Terms</a> · <a href="https://thehivemakes.com/disclosures.html" style="color:var(--muted);font-size:11px;">Disclosures</a></footer>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--card-bg);border-top:2px solid var(--border);padding:12px 16px;font-size:12px;color:var(--muted);text-align:center;z-index:9999;">This site uses cookies for ads and analytics. By continuing, you accept our <a href="https://thehivemakes.com/privacy.html" style="color:var(--accent)">Privacy Policy</a>. <button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('cookie-ok','1');" style="margin-left:12px;padding:4px 14px;background:var(--accent);color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;">Got it</button></div>
+<script>if(!localStorage.getItem('cookie-ok'))document.getElementById('cookie-banner').style.display='block';</script>
+<script>
+
+function calculate() {
+  const slRaw = CalcCore.get('shell_length');
+  const unit = CalcCore.getSelect('unit');
+  const count = CalcCore.get('num_tortoises') || 1;
+  const stage = CalcCore.getSelect('life_stage');
+  const housing = CalcCore.getSelect('housing');
+  if (isNaN(slRaw) || slRaw <= 0 || isNaN(count) || count < 1) return;
+
+  const slIn = unit === 'cm' ? slRaw / 2.54 : slRaw;
+
+  let lenIn = slIn * 10;
+  let widIn = slIn * 5;
+
+  const OUTDOOR_DIM_MULT = 2; // applied to each dimension -> ~4x area
+  if (housing === 'outdoor') {
+    lenIn *= OUTDOOR_DIM_MULT;
+    widIn *= OUTDOOR_DIM_MULT;
+  }
+
+  const areaSqftPer = (lenIn / 12) * (widIn / 12);
+  const areaSqmPer = areaSqftPer * 0.092903;
+
+  const totalWidIn = widIn * count;
+  const totalAreaSqft = areaSqftPer * count;
+  const totalAreaSqm = totalAreaSqft * 0.092903;
+
+  const lenFt = lenIn / 12;
+  const widFt = widIn / 12;
+  const totalWidFt = totalWidIn / 12;
+
+  let stageNote;
+  if (stage === 'hatchling') {
+    stageNote = 'Hatchlings grow quickly \u2014 re-measure the shell and recalculate every 2\u20133 months rather than building for adult size up front.';
+  } else if (stage === 'juvenile') {
+    stageNote = 'Juveniles are still growing \u2014 recheck shell length every 3\u20134 months and expand housing as needed.';
+  } else {
+    stageNote = "Adult shell length is close to final \u2014 this minimum should hold for the tortoise's remaining growth.";
+  }
+
+  CalcCore.set('t-area-per-sqft', CalcCore.fmt(areaSqftPer, 1) + ' sq ft');
+  CalcCore.set('t-area-per-sqm', CalcCore.fmt(areaSqmPer, 2) + ' sq m');
+  CalcCore.set('t-dims-per', CalcCore.fmt(lenFt, 1) + ' ft \u00d7 ' + CalcCore.fmt(widFt, 1) + ' ft');
+  CalcCore.set('t-area-total-sqft', CalcCore.fmt(totalAreaSqft, 1) + ' sq ft');
+  CalcCore.set('t-area-total-sqm', CalcCore.fmt(totalAreaSqm, 2) + ' sq m');
+  CalcCore.set('t-dims-total', CalcCore.fmt(lenFt, 1) + ' ft \u00d7 ' + CalcCore.fmt(totalWidFt, 1) + ' ft (for ' + count + ')');
+  CalcCore.set('t-stage-note', stageNote);
+  CalcCore.showResult();
+  CalcCore.saveParams(['shell_length','unit','num_tortoises','life_stage','housing']);
+}
+
+function clearAll() {
+  ["shell_length", "unit", "num_tortoises", "life_stage", "housing"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = el.defaultValue || '';
+  });
+  document.getElementById('result').classList.remove('visible');
+  history.replaceState(null, '', window.location.pathname);
+}
+
+document.addEventListener('DOMContentLoaded', () => { if (window.location.search) calculate(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tortoise.thehivemakes.com/sitemap.xml
