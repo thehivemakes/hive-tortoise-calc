@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tortoise Growth Rate Checker — TortoiseCalc</title>
+<meta name="description" content="Free tortoise growth rate checker. Enter species, age, and shell length to compare against commonly-cited growth ranges for sulcata, Hermann's, and Russian tortoises.">
+<meta property="og:title" content="Tortoise Growth Rate Checker — TortoiseCalc">
+<meta property="og:description" content="Free tortoise growth rate checker. Enter species, age, and shell length to compare against commonly-cited growth ranges for sulcata, Hermann's, and Russian tortoises.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tortoise.thehivemakes.com/growth-rate-checker.html">
+<link rel="stylesheet" href="style.css">
+<script src="js/calc-core.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Tortoise Growth Rate Checker",
+  "url": "https://tortoise.thehivemakes.com/growth-rate-checker.html",
+  "description": "Free tortoise growth rate checker. Enter species, age, and shell length to compare against commonly-cited growth ranges for sulcata, Hermann's, and Russian tortoises.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any"
+}
+</script>
+</head>
+<body>
+<header><div class="header-inner"><div class="logo">Tortoise<span>Calc</span></div><div class="tagline">Free tortoise enclosure calculator</div><button onclick="toggleTheme()" style="background:none;border:1px solid var(--border);border-radius:6px;padding:2px 8px;color:var(--muted);cursor:pointer;font-size:14px;margin-left:auto;" aria-label="Toggle dark mode">&#9790;</button></div></header>
+<nav><div class="nav-inner"><a href="index.html">TortoiseCalc</a><span class="sep">/</span><span>Tortoise Growth Rate Checker</span></div></nav>
+<main>
+  <div class="ad-leaderboard" id="ad-top">Ad</div>
+  <div class="card">
+    <h1>Tortoise Growth Rate Checker</h1>
+    <p class="subtitle">Enter species, age, and current shell length to see whether it reads within, above, or below the commonly-cited range for that checkpoint.</p>
+    <div class="form-grid">
+      <div class="field">
+        <label for="species">Species</label>
+        <select id="species"><option value="sulcata">Sulcata</option><option value="hermanns">Hermann's</option><option value="russian">Russian</option></select>
+      </div>
+      <div class="field">
+        <label for="age_years">Age (years)</label>
+        <input type="number" id="age_years" min="0" step="0.1" placeholder="2">
+      </div>
+      <div class="field">
+        <label for="shell_length">Shell length</label>
+        <input type="number" id="shell_length" min="0.1" step="0.1" placeholder="3.5">
+      </div>
+      <div class="field">
+        <label for="unit">Unit</label>
+        <select id="unit"><option value="in">Inches</option><option value="cm">Centimeters</option></select>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="calculate()">Calculate</button>
+    <button class="btn btn-ghost" onclick="clearAll()">Clear</button>
+    <div class="result" id="result">
+      <div class="result-row">
+        <span class="result-label">Comparison to cited range</span>
+        <span class="result-value" id="g-result">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Commonly-cited range at this checkpoint</span>
+        <span class="result-value" id="g-range">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Checkpoint used</span>
+        <span class="result-value" id="g-checkpoint">—</span>
+      </div>
+      <div class="result-note">Individual growth varies significantly with diet, temperature, and genetics even within the same species. This compares your tortoise to commonly-cited reference ranges from tortoise-keeping sources, not a veterinary or species-registry standard. If you have concerns about your tortoise's growth, consult an experienced keeper or reptile veterinarian.</div>
+      <div class="shop-links" style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);">&#128722; Shop related: <a href="https://www.ebay.com/sch/i.html?_nkw=tortoise+table+enclosure&mkcid=1&mkrid=711-53200-19255-0&campid=5339147838&toolid=10001" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:600;">Tortoise tables</a> &middot; <a href="https://www.ebay.com/sch/i.html?_nkw=reptile+uvb+lighting&mkcid=1&mkrid=711-53200-19255-0&campid=5339147838&toolid=10001" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:600;">UVB lighting</a> &middot; <a href="https://www.ebay.com/sch/i.html?_nkw=tortoise+substrate&mkcid=1&mkrid=711-53200-19255-0&campid=5339147838&toolid=10001" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:600;">Substrate</a><br><span style="font-size:10px;opacity:0.7;">Affiliate links — we may earn a commission at no cost to you. <a href="https://thehivemakes.com/disclosures.html" target="_blank" style="color:var(--muted);">Learn more</a></span></div>
+    </div>
+  </div>
+  <div class="card email-capture">
+    <h2>Get your results + weekly tortoise care tips</h2>
+    <p>One email per week. Tips, tool deals, new calculators. Unsubscribe anytime.</p>
+    <form method="POST" action="https://buttondown.com/api/emails/embed-subscribe/thehivemakes" class="capture-form">
+      <input type="email" name="email" placeholder="your@email.com" required>
+      <input type="hidden" name="tag" value="tortoise">
+      <input type="hidden" name="metadata__source" value="growth-rate-checker">
+      <button type="submit" class="btn btn-primary">Send My Results</button>
+    </form>
+    <p class="capture-note">Free tools, useful tips. We recommend products we'd actually use.</p>
+  </div>
+  <div class="card">
+    <h2 style="font-size:16px;font-weight:700;margin-bottom:12px;">Cited Growth Checkpoints by Species</h2>
+    <table class="ref-table" id="ref-table">
+      <thead><tr><th>Species</th><th>Age checkpoint</th><th>Shell length range (in)</th></tr></thead>
+      <tbody>
+        <tr><td>Sulcata</td><td>Hatchling (0-6 mo)</td><td>1.5-2.5</td></tr>
+        <tr><td>Sulcata</td><td>1 year</td><td>3.5-6.5</td></tr>
+        <tr><td>Sulcata</td><td>5 years</td><td>8-15</td></tr>
+        <tr><td>Sulcata</td><td>10 years</td><td>15-20</td></tr>
+        <tr><td>Sulcata</td><td>Adult (15-20+ yr)</td><td>18-30</td></tr>
+        <tr><td>Hermann's</td><td>Hatchling</td><td>1-2</td></tr>
+        <tr><td>Hermann's</td><td>1 year</td><td>2-3</td></tr>
+        <tr><td>Hermann's</td><td>2 years</td><td>3-3.5</td></tr>
+        <tr><td>Hermann's</td><td>3 years</td><td>3.5-4.5</td></tr>
+        <tr><td>Hermann's</td><td>6 years</td><td>5-7</td></tr>
+        <tr><td>Russian</td><td>Hatchling (<1 yr)</td><td>1-1.5</td></tr>
+        <tr><td>Russian</td><td>Adult (~10-20+ yr)</td><td>5-10</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="ad-rectangle" id="ad-mid">Ad</div>
+  <div class="seo-section">
+    <h2>How to Read a Tortoise Growth Checkpoint</h2>
+    <p>Sulcata tortoises are hatchlings around 1.5-2.5 inches, add roughly 2-4 inches of shell length in their first year, and commonly reach 8-15 inches by age 5 and 15-20 inches by age 10 before leveling off as adults in the 18-30 inch range, according to tortoise-keeping references.</p>
+    <p>Hermann's tortoises grow more slowly and stay much smaller: hatchlings are typically 1-2 inches, reaching roughly 2-3 inches at one year, 3-3.5 inches at two years, and 5-7 inches by six years in commonly cited ranges.</p>
+    <p>Russian tortoises are the smallest of the three and their growth data is coarser in most keeping references \u2014 hatchlings start around 1-1.5 inches and gain roughly 1-2 inches per year until adults settle around 5-6 inches (males) to 7-10 inches (females). This checker uses a combined adult range since it does not ask for sex.</p>
+  </div>
+</main>
+<footer>Free tortoise enclosure sizing tool. No signup, no tracking. General husbandry guidelines only, not species-specific or veterinary advice.<br>Built by <a href="https://thehivemakes.com" style="color:var(--accent)">The Hive</a> · <a href="https://thehivemakes.com/privacy.html" style="color:var(--muted);font-size:11px;">Privacy</a> · <a href="https://thehivemakes.com/terms.html" style="color:var(--muted);font-size:11px;">Terms</a> · <a href="https://thehivemakes.com/disclosures.html" style="color:var(--muted);font-size:11px;">Disclosures</a></footer>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--card-bg);border-top:2px solid var(--border);padding:12px 16px;font-size:12px;color:var(--muted);text-align:center;z-index:9999;">This site uses cookies for ads and analytics. By continuing, you accept our <a href="https://thehivemakes.com/privacy.html" style="color:var(--accent)">Privacy Policy</a>. <button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('cookie-ok','1');" style="margin-left:12px;padding:4px 14px;background:var(--accent);color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;">Got it</button></div>
+<script>if(!localStorage.getItem('cookie-ok'))document.getElementById('cookie-banner').style.display='block';</script>
+<script>
+
+function calculate() {
+  const species = CalcCore.getSelect('species');
+  const age = CalcCore.get('age_years');
+  const lenRaw = CalcCore.get('shell_length');
+  const unit = CalcCore.getSelect('unit');
+  if (!species || isNaN(age) || age < 0 || isNaN(lenRaw) || lenRaw <= 0) return;
+
+  const BRACKETS = {
+    sulcata: [
+      { age: 0.25, label: 'Hatchling (0\u20136 months)', range: [1.5, 2.5] },
+      { age: 1, label: '1 year', range: [3.5, 6.5] },
+      { age: 5, label: '5 years', range: [8, 15] },
+      { age: 10, label: '10 years', range: [15, 20] },
+      { age: 17, label: 'Adult (15\u201320+ years)', range: [18, 30] }
+    ],
+    hermanns: [
+      { age: 0, label: 'Hatchling', range: [1, 2] },
+      { age: 1, label: '1 year', range: [2, 3] },
+      { age: 2, label: '2 years', range: [3, 3.5] },
+      { age: 3, label: '3 years', range: [3.5, 4.5] },
+      { age: 6, label: '6 years', range: [5, 7] }
+    ],
+    russian: [
+      { age: 0, label: 'Hatchling (<1 year)', range: [1, 1.5] },
+      { age: 15, label: 'Adult (~10\u201320+ years)', range: [5, 10] }
+    ]
+  };
+
+  const lenIn = unit === 'cm' ? lenRaw / 2.54 : lenRaw;
+  const brackets = BRACKETS[species];
+  let nearest = brackets[0];
+  let minDiff = Math.abs(age - nearest.age);
+  brackets.forEach(b => {
+    const diff = Math.abs(age - b.age);
+    if (diff < minDiff) { minDiff = diff; nearest = b; }
+  });
+
+  const lo = nearest.range[0];
+  const hi = nearest.range[1];
+  let status;
+  if (lenIn < lo) status = 'Below';
+  else if (lenIn > hi) status = 'Above';
+  else status = 'Within';
+
+  const loDisp = unit === 'cm' ? lo * 2.54 : lo;
+  const hiDisp = unit === 'cm' ? hi * 2.54 : hi;
+  const unitLabel = unit === 'cm' ? 'cm' : 'in';
+  const exact = Math.abs(age - nearest.age) < 0.01;
+
+  CalcCore.set('g-result', status + ' the commonly-cited range');
+  CalcCore.set('g-range', CalcCore.fmt(loDisp, 1) + '\u2013' + CalcCore.fmt(hiDisp, 1) + ' ' + unitLabel);
+  CalcCore.set('g-checkpoint', nearest.label + (exact ? '' : ' \u2014 closest cited checkpoint (entered age ' + age + ')'));
+  CalcCore.showResult();
+  CalcCore.saveParams(['species','age_years','shell_length','unit']);
+}
+
+function clearAll() {
+  ["species", "age_years", "shell_length", "unit"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = el.defaultValue || '';
+  });
+  document.getElementById('result').classList.remove('visible');
+  history.replaceState(null, '', window.location.pathname);
+}
+
+document.addEventListener('DOMContentLoaded', () => { if (window.location.search) calculate(); });
+</script>
+</body>
+</html>
